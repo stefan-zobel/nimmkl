@@ -49,3 +49,26 @@ type
   TOrder* = enum
     ColMajor = 'C',
     RowMajor = 'R'
+
+
+proc toPtr(a: seq[int]): ptr cint =
+  cast[ptr cint](unsafeAddr(a[0]))
+
+proc toPtr(a: seq[float64]): ptr cdouble =
+  unsafeAddr(a[0])
+
+proc toPtr(a: seq[float32]): ptr cfloat =
+  unsafeAddr(a[0])
+
+
+proc dgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float64];
+                       lda: int; s: seq[float64]; u: seq[float64]; ldu: int;
+                       vt: seq[float64]; ldvt: int): int =
+  dgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s), toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+
+proc sgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float32];
+            lda: int; s: seq[float32]; u: seq[float32]; ldu: int; vt: seq[float32];
+            ldvt: int): int =
+  sgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s), toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+
+
