@@ -64,11 +64,25 @@ proc toPtr(a: seq[float32]): ptr cfloat =
 proc dgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float64];
             lda: int; s: seq[float64]; u: seq[float64]; ldu: int; vt: seq[float64];
             ldvt: int): int =
-  dgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s), toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+  dgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s),
+    toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
 
 proc sgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float32];
             lda: int; s: seq[float32]; u: seq[float32]; ldu: int; vt: seq[float32];
             ldvt: int): int =
-  sgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s), toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+  sgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s),
+    toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+
+proc dgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: seq[float64];
+           lda: int; wr: seq[float64]; wi: seq[float64]; vl: seq[float64]; ldvl: int;
+           vr: seq[float64]; ldvr: int): int =
+  dgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint, toPtr(wr),
+    toPtr(wi), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
+
+proc sgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: seq[float32];
+           lda: int; wr: seq[float32]; wi: seq[float32]; vl: seq[float32]; ldvl: int;
+           vr: seq[float32]; ldvr: int): int =
+  sgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint, toPtr(wr),
+    toPtr(wi), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
 
 
