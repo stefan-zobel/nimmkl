@@ -62,8 +62,8 @@ proc toPtr(a: seq[float32]): ptr cfloat =
 
 
 proc dgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float64];
-                       lda: int; s: seq[float64]; u: seq[float64]; ldu: int;
-                       vt: seq[float64]; ldvt: int): int =
+            lda: int; s: seq[float64]; u: seq[float64]; ldu: int; vt: seq[float64];
+            ldvt: int): int =
   dgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s), toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
 
 proc sgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float32];
