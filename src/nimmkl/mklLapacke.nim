@@ -11,14 +11,14 @@ const
 ##  The value is selected if function returns non-zero.
 
 type
-  Lapack_S_Select2* = proc (a1: ptr cfloat; a2: ptr cfloat): LapackLogical
-  Lapack_S_Select3* = proc (a1: ptr cfloat; a2: ptr cfloat; a3: ptr cfloat): LapackLogical
-  Lapack_D_Select2* = proc (a1: ptr cdouble; a2: ptr cdouble): LapackLogical
-  Lapack_D_Select3* = proc (a1: ptr cdouble; a2: ptr cdouble; a3: ptr cdouble): LapackLogical
-  Lapack_C_Select1* = proc (a1: ptr LapackComplexFloat): LapackLogical
-  Lapack_C_Select2* = proc (a1: ptr LapackComplexFloat; a2: ptr LapackComplexFloat): LapackLogical
-  Lapack_Z_Select1* = proc (a1: ptr LapackComplexDouble): LapackLogical
-  Lapack_Z_Select2* = proc (a1: ptr LapackComplexDouble; a2: ptr LapackComplexDouble): LapackLogical
+  Lapack_S_Select2* = proc (a1: ptr cfloat; a2: ptr cfloat): LapackLogical {.cdecl.}
+  Lapack_S_Select3* = proc (a1: ptr cfloat; a2: ptr cfloat; a3: ptr cfloat): LapackLogical {.cdecl.}
+  Lapack_D_Select2* = proc (a1: ptr cdouble; a2: ptr cdouble): LapackLogical {.cdecl.}
+  Lapack_D_Select3* = proc (a1: ptr cdouble; a2: ptr cdouble; a3: ptr cdouble): LapackLogical {.cdecl.}
+  Lapack_C_Select1* = proc (a1: ptr LapackComplexFloat): LapackLogical {.cdecl.}
+  Lapack_C_Select2* = proc (a1: ptr LapackComplexFloat; a2: ptr LapackComplexFloat): LapackLogical {.cdecl.}
+  Lapack_Z_Select1* = proc (a1: ptr LapackComplexDouble): LapackLogical {.cdecl.}
+  Lapack_Z_Select2* = proc (a1: ptr LapackComplexDouble; a2: ptr LapackComplexDouble): LapackLogical {.cdecl.}
 
 
 proc dlamch*(cmach: char): cdouble {.importc: "LAPACKE_dlamch", dynlib: libName.}
