@@ -85,4 +85,48 @@ proc sgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: se
   sgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint, toPtr(wr),
     toPtr(wi), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
 
+proc dgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float64]; lda: int;
+            indices: seq[int]): int =
+  dgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
+
+proc sgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float32]; lda: int;
+            indices: seq[int]): int =
+  sgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
+
+proc dgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float64]; lda: int;
+            tau: seq[float64]): int =
+  dgeqrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc sgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float32]; lda: int;
+            tau: seq[float32]): int =
+  sgeqrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc dorgqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[float64];
+            lda: int; tau: seq[float64]): int =
+  dorgqr(matrixLayout.cint, m.cint, n.cint, k.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc sorgqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[float32];
+            lda: int; tau: seq[float32]): int =
+  sorgqr(matrixLayout.cint, m.cint, n.cint, k.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc dgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[float64]; lda: int;
+           indices: seq[int]; b: seq[float64]; ldb: int): int =
+  dgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices),
+    toPtr(b), ldb.cint)
+
+proc sgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[float32]; lda: int;
+           indices: seq[int]; b: seq[float32]; ldb: int): int =
+  sgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices),
+    toPtr(b), ldb.cint)
+
+proc dgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int; a: seq[float64];
+           lda: int; b: seq[float64]; ldb: int): int =
+  dgels(matrixLayout.cint, trans.cchar, m.cint, n.cint, nrhs.cint, toPtr(a),
+    lda.cint, toPtr(b), ldb.cint)
+
+proc sgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int; a: seq[float32];
+           lda: int; b: seq[float32]; ldb: int): int =
+  sgels(matrixLayout.cint, trans.cchar, m.cint, n.cint, nrhs.cint, toPtr(a),
+    lda.cint, toPtr(b), ldb.cint)
+
 
