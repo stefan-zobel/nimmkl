@@ -164,4 +164,40 @@ proc cgemm3m*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Trans
   cgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, addr alph, toPtr(a),
     lda.cint, toPtr(b), ldb.cint, addr bet, toPtr(c), ldc.cint)
 
+proc zungqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[Complex64];
+            lda: int; tau: seq[Complex64]): int =
+  zungqr(matrixLayout.cint, m.cint, n.cint, k.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc cungqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[Complex32];
+            lda: int; tau: seq[Complex32]): int =
+  cungqr(matrixLayout.cint, m.cint, n.cint, k.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc zgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex64]; lda: int;
+            tau: seq[Complex64]): int =
+  zgeqrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc cgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex32]; lda: int;
+            tau: seq[Complex32]): int =
+  cgeqrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(tau))
+
+proc zgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex64]; lda: int;
+            indices: seq[int]): int =
+  zgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
+
+proc cgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex32]; lda: int;
+            indices: seq[int]): int =
+  cgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
+
+proc zgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: seq[Complex64];
+           lda: int; w: seq[Complex64]; vl: seq[Complex64]; ldvl: int; vr: seq[Complex64];
+           ldvr: int): int =
+  zgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint,
+    toPtr(w), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
+
+proc cgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: seq[Complex32];
+           lda: int; w: seq[Complex32]; vl: seq[Complex32]; ldvl: int; vr: seq[Complex32];
+           ldvr: int): int =
+  cgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint,
+    toPtr(w), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
+
 
