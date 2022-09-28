@@ -129,4 +129,16 @@ proc sgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int; a: 
   sgels(matrixLayout.cint, trans.cchar, m.cint, n.cint, nrhs.cint, toPtr(a),
     lda.cint, toPtr(b), ldb.cint)
 
+proc dgemm*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose; m: int;
+           n: int; k: int; alpha: float64; a: seq[float64]; lda: int; b: seq[float64];
+           ldb: int; beta: float64; c: seq[float64]; ldc: int) =
+  dgemm(layout, transA, transB, m.cint, n.cint, k.cint, alpha, toPtr(a),
+    lda.cint, toPtr(b), ldb.cint, beta, toPtr(c), ldc.cint)
+
+proc sgemm*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose; m: int;
+           n: int; k: int; alpha: float32; a: seq[float32]; lda: int; b: seq[float32];
+           ldb: int; beta: float32; c: seq[float32]; ldc: int) =
+  sgemm(layout, transA, transB, m.cint, n.cint, k.cint, alpha, toPtr(a),
+    lda.cint, toPtr(b), ldb.cint, beta, toPtr(c), ldc.cint)
+
 
