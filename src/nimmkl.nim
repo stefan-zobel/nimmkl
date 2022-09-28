@@ -200,4 +200,34 @@ proc cgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: se
   cgeev(matrixLayout.cint, jobvl.cchar, jobvr.cchar, n.cint, toPtr(a), lda.cint,
     toPtr(w), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
 
+proc zgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int;
+           a: seq[Complex64]; lda: int; b: seq[Complex64]; ldb: int): int =
+  zgels(matrixLayout.cint, trans.cchar, m.cint, n.cint, nrhs.cint, toPtr(a), lda.cint,
+    toPtr(b), ldb.cint)
+
+proc cgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int;
+           a: seq[Complex32]; lda: int; b: seq[Complex32]; ldb: int): int =
+  cgels(matrixLayout.cint, trans.cchar, m.cint, n.cint, nrhs.cint, toPtr(a), lda.cint,
+    toPtr(b), ldb.cint)
+
+proc zgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[Complex64]; lda: int;
+           indices: seq[int]; b: seq[Complex64]; ldb: int): int =
+  zgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices), toPtr(b), ldb.cint)
+
+proc cgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[Complex32]; lda: int;
+           indices: seq[int]; b: seq[Complex32]; ldb: int): int =
+  cgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices), toPtr(b), ldb.cint)
+
+proc zgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[Complex64];
+            lda: int; s: seq[float64]; u: seq[Complex64]; ldu: int; vt: seq[Complex64];
+            ldvt: int): int =
+  zgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s),
+    toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+
+proc cgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[Complex32];
+            lda: int; s: seq[float32]; u: seq[Complex32]; ldu: int; vt: seq[Complex32];
+            ldvt: int): int =
+  cgesdd(matrixLayout.cint, jobz.cchar, m.cint, n.cint, toPtr(a), lda.cint, toPtr(s),
+    toPtr(u), ldu.cint, toPtr(vt), ldvt.cint)
+
 
