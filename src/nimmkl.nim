@@ -151,18 +151,14 @@ proc sgemm*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpo
 proc zgemm3m*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose;
              m: int; n: int; k: int; alpha: Complex64; a: seq[Complex64]; lda: int;
              b: seq[Complex64]; ldb: int; beta: Complex64; c: seq[Complex64]; ldc: int) =
-  var alph = MKL_Complex16(re: alpha.re, im: alpha.im) # TODO
-  var bet = MKL_Complex16(re: beta.re, im: beta.im) # TODO
-  zgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, addr alph, toPtr(a),
-    lda.cint, toPtr(b), ldb.cint, addr bet, toPtr(c), ldc.cint)
+  zgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, unsafeAddr(alpha), toPtr(a),
+    lda.cint, toPtr(b), ldb.cint, unsafeAddr(beta), toPtr(c), ldc.cint)
 
 proc cgemm3m*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose;
              m: int; n: int; k: int; alpha: Complex32; a: seq[Complex32]; lda: int;
              b: seq[Complex32]; ldb: int; beta: Complex32; c: seq[Complex32]; ldc: int) =
-  var alph = MKL_Complex8(re: alpha.re, im: alpha.im) # TODO
-  var bet = MKL_Complex8(re: beta.re, im: beta.im) # TODO
-  cgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, addr alph, toPtr(a),
-    lda.cint, toPtr(b), ldb.cint, addr bet, toPtr(c), ldc.cint)
+  cgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, unsafeAddr(alpha), toPtr(a),
+    lda.cint, toPtr(b), ldb.cint, unsafeAddr(beta), toPtr(c), ldc.cint)
 
 proc zungqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[Complex64];
             lda: int; tau: seq[Complex64]): int =
