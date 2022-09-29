@@ -1,3 +1,5 @@
+import std/complex
+
 when defined(windows):
   const
     libSuffix = ".dll"
@@ -26,14 +28,8 @@ type
 
 
 type
-  MKL_Complex8* {.importc: "MKL_Complex8", header: "mkl_types.h", bycopy.} = object
-    real* {.importc: "real".}: cfloat
-    imag* {.importc: "imag".}: cfloat
-
-type
-  MKL_Complex16* {.importc: "MKL_Complex16", header: "mkl_types.h", bycopy.} = object
-    real* {.importc: "real".}: cdouble
-    imag* {.importc: "imag".}: cdouble
+  MKL_Complex8* = Complex32
+  MKL_Complex16* = Complex64
 
 
 type

@@ -62,10 +62,10 @@ proc toPtr(a: seq[float32]): ptr cfloat =
   unsafeAddr(a[0])
 
 proc toPtr(a: seq[Complex64]): ptr MKL_Complex16 =
-  cast[ptr MKL_Complex16](unsafeAddr(a[0]))
+  unsafeAddr(a[0])
 
 proc toPtr(a: seq[Complex32]): ptr MKL_Complex8 =
-  cast[ptr MKL_Complex8](unsafeAddr(a[0]))
+  unsafeAddr(a[0])
 
 
 proc dgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float64];
@@ -151,16 +151,16 @@ proc sgemm*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpo
 proc zgemm3m*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose;
              m: int; n: int; k: int; alpha: Complex64; a: seq[Complex64]; lda: int;
              b: seq[Complex64]; ldb: int; beta: Complex64; c: seq[Complex64]; ldc: int) =
-  var alph = MKL_Complex16(real: alpha.re, imag: alpha.im)
-  var bet = MKL_Complex16(real: beta.re, imag: beta.im)
+  var alph = MKL_Complex16(re: alpha.re, im: alpha.im) # TODO
+  var bet = MKL_Complex16(re: beta.re, im: beta.im) # TODO
   zgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, addr alph, toPtr(a),
     lda.cint, toPtr(b), ldb.cint, addr bet, toPtr(c), ldc.cint)
 
 proc cgemm3m*(layout: Cblas_Layout; transA: Cblas_Transpose; transB: Cblas_Transpose;
              m: int; n: int; k: int; alpha: Complex32; a: seq[Complex32]; lda: int;
              b: seq[Complex32]; ldb: int; beta: Complex32; c: seq[Complex32]; ldc: int) =
-  var alph = MKL_Complex8(real: alpha.re, imag: alpha.im)
-  var bet = MKL_Complex8(real: beta.re, imag: beta.im)
+  var alph = MKL_Complex8(re: alpha.re, im: alpha.im) # TODO
+  var bet = MKL_Complex8(re: beta.re, im: beta.im) # TODO
   cgemm3m(layout, transA, transB, m.cint, n.cint, k.cint, addr alph, toPtr(a),
     lda.cint, toPtr(b), ldb.cint, addr bet, toPtr(c), ldc.cint)
 
