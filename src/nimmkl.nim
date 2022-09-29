@@ -53,19 +53,34 @@ type
 
 
 proc toPtr(a: seq[int]): ptr cint =
-  cast[ptr cint](unsafeAddr(a[0]))
+  if a.len > 0:
+    cast[ptr cint](unsafeAddr(a[0]))
+  else:
+    nil
 
 proc toPtr(a: seq[float64]): ptr cdouble =
-  unsafeAddr(a[0])
+  if a.len > 0:
+    unsafeAddr(a[0])
+  else:
+    nil
 
 proc toPtr(a: seq[float32]): ptr cfloat =
-  unsafeAddr(a[0])
+  if a.len > 0:
+    unsafeAddr(a[0])
+  else:
+    nil
 
 proc toPtr(a: seq[Complex64]): ptr MKL_Complex16 =
-  unsafeAddr(a[0])
+  if a.len > 0:
+    unsafeAddr(a[0])
+  else:
+    nil
 
 proc toPtr(a: seq[Complex32]): ptr MKL_Complex8 =
-  unsafeAddr(a[0])
+  if a.len > 0:
+    unsafeAddr(a[0])
+  else:
+    nil
 
 
 proc dgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[float64];
