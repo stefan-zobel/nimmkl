@@ -1,8 +1,5 @@
-import ../nimmkl
+import ../nimmkl,common
 import std/complex
-
-type
-  SomeElementType* = SomeFloat|Complex32|Complex64
 
 
 template ty(T: typedesc[float64]): typedesc[float64] = typedesc[float64]
