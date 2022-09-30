@@ -62,21 +62,21 @@ proc svdEconAuto[T: SomeElementType](m: int; n: int; a: seq[T]): auto =
   (r, u, s, vt)
 
 
-proc svdAll*[T: float64|Complex64](m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
+proc svdAll*[T: float64|Complex64](ty: typedesc[float64|Complex64], m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
   svdAllAuto[T](m, n, a)
 
-proc svdAll*[T: float32|Complex32](m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
+proc svdAll*[T: float32|Complex32](ty: typedesc[float32|Complex32], m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
   svdAllAuto[T](m, n, a)
 
-proc svdNone*[T: float64|Complex64](m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
+proc svdNone*[T: float64|Complex64](ty: typedesc[float64|Complex64], m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
   svdNoneAuto[T](m, n, a)
 
-proc svdNone*[T: float32|Complex32](m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
+proc svdNone*[T: float32|Complex32](ty: typedesc[float32|Complex32], m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
   svdNoneAuto[T](m, n, a)
 
-proc svdEcon*[T: float64|Complex64](m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
+proc svdEcon*[T: float64|Complex64](ty: typedesc[float64|Complex64], m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
   svdEconAuto[T](m, n, a)
 
-proc svdEcon*[T: float32|Complex32](m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
+proc svdEcon*[T: float32|Complex32](ty: typedesc[float32|Complex32], m: int; n: int; a: seq[T]): (int, seq[T], seq[float32], seq[T]) =
   svdEconAuto[T](m, n, a)
 
