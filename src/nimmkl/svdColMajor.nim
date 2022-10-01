@@ -29,6 +29,8 @@ proc newUSVt[T, U](m: int, n: int, jobz: TSvdJob) : (seq[T], seq[U], seq[T]) =
   (u, s, vt)
 
 
+# generic ?gesdd
+
 proc gesdd*[T: SomeElementType, U: SomeFloat](matrixLayout: TLayout;
   jobz: TSvdJob; m: int; n: int; a: seq[T]; lda: int; s: seq[U]; u: seq[T];
   ldu: int; vt: seq[T]; ldvt: int): int =
@@ -64,6 +66,8 @@ proc svdEconAuto[T: SomeElementType](m: int; n: int; a: seq[T]): auto =
     max(1, m), s, u, max(1, m), vt, max(1, min(m, n)))
   (r, u, s, vt)
 
+
+# convenience singular value decomposition
 
 proc svdAll*[T: float64|Complex64](ty: typedesc[float64|Complex64], m: int; n: int; a: seq[T]): (int, seq[T], seq[float64], seq[T]) =
   svdAllAuto[T](m, n, a)

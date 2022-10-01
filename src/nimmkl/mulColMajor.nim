@@ -1,6 +1,8 @@
 import ../nimmkl,common,mklTypes
 import std/complex
 
+# generic ?gemm
+
 proc gemm*[T: SomeElementType](layout: Cblas_Layout; transA: Cblas_Transpose;
            transB: Cblas_Transpose; m: int; n: int; k: int; alpha: T; a: seq[T];
            lda: int; b: seq[T]; ldb: int; beta: T; c: seq[T]; ldc: int) =
@@ -14,6 +16,8 @@ proc gemm*[T: SomeElementType](layout: Cblas_Layout; transA: Cblas_Transpose;
   when T is Complex32:
     cgemm3m(layout, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 
+
+# convenience multiplication A * B
 
 proc mul*[T: SomeElementType](m: int; n: int; k: int; a: seq[T]; b: seq[T]): seq[T] =
   when T is float64:
