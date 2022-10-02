@@ -54,7 +54,7 @@ type
 
 proc toPtr(a: seq[int32]): ptr cint =
   if a.len > 0:
-    cast[ptr cint](unsafeAddr(a[0]))
+    unsafeAddr(a[0])
   else:
     nil
 
