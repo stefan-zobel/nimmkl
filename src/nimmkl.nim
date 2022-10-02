@@ -52,7 +52,7 @@ type
     RowMajor = 'R'
 
 
-proc toPtr(a: seq[int]): ptr cint =
+proc toPtr(a: seq[int32]): ptr cint =
   if a.len > 0:
     cast[ptr cint](unsafeAddr(a[0]))
   else:
@@ -108,11 +108,11 @@ proc sgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: se
     toPtr(wi), toPtr(vl), ldvl.cint, toPtr(vr), ldvr.cint)
 
 proc dgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float64]; lda: int;
-            indices: seq[int]): int =
+            indices: seq[int32]): int =
   dgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
 
 proc sgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float32]; lda: int;
-            indices: seq[int]): int =
+            indices: seq[int32]): int =
   sgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
 
 proc dgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[float64]; lda: int;
@@ -132,12 +132,12 @@ proc sorgqr*(matrixLayout: TLayout; m: int; n: int; k: int; a: seq[float32];
   sorgqr(matrixLayout.cint, m.cint, n.cint, k.cint, toPtr(a), lda.cint, toPtr(tau))
 
 proc dgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[float64]; lda: int;
-           indices: seq[int]; b: seq[float64]; ldb: int): int =
+           indices: seq[int32]; b: seq[float64]; ldb: int): int =
   dgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices),
     toPtr(b), ldb.cint)
 
 proc sgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[float32]; lda: int;
-           indices: seq[int]; b: seq[float32]; ldb: int): int =
+           indices: seq[int32]; b: seq[float32]; ldb: int): int =
   sgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices),
     toPtr(b), ldb.cint)
 
@@ -192,11 +192,11 @@ proc cgeqrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex32]; lda: int;
   cgeqrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(tau))
 
 proc zgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex64]; lda: int;
-            indices: seq[int]): int =
+            indices: seq[int32]): int =
   zgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
 
 proc cgetrf*(matrixLayout: TLayout; m: int; n: int; a: seq[Complex32]; lda: int;
-            indices: seq[int]): int =
+            indices: seq[int32]): int =
   cgetrf(matrixLayout.cint, m.cint, n.cint, toPtr(a), lda.cint, toPtr(indices))
 
 proc zgeev*(matrixLayout: TLayout; jobvl: TEigJob; jobvr: TEigJob; n: int; a: seq[Complex64];
@@ -222,11 +222,11 @@ proc cgels*(matrixLayout: TLayout; trans: TTrans; m: int; n: int; nrhs: int;
     toPtr(b), ldb.cint)
 
 proc zgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[Complex64]; lda: int;
-           indices: seq[int]; b: seq[Complex64]; ldb: int): int =
+           indices: seq[int32]; b: seq[Complex64]; ldb: int): int =
   zgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices), toPtr(b), ldb.cint)
 
 proc cgesv*(matrixLayout: TLayout; n: int; nrhs: int; a: seq[Complex32]; lda: int;
-           indices: seq[int]; b: seq[Complex32]; ldb: int): int =
+           indices: seq[int32]; b: seq[Complex32]; ldb: int): int =
   cgesv(matrixLayout.cint, n.cint, nrhs.cint, toPtr(a), lda.cint, toPtr(indices), toPtr(b), ldb.cint)
 
 proc zgesdd*(matrixLayout: TLayout; jobz: TSvdJob; m: int; n: int; a: seq[Complex64];
