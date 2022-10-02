@@ -103,10 +103,8 @@ proc buildMatrix[T](perm: seq[int32], dim: int): seq[T] =
 
 proc genEye[T](dim: int): seq[T] =
   var identity = newSeq[T](dim * dim)
-  for col in 0..<dim:
-    for row in 0..<dim:
-      if row == col:
-        identity[col * dim + row] = ONE[T]()
+  for i in 0..<dim:
+    identity[i * dim + i] = ONE[T]()
   result = identity
 
 proc genPermutationMatrix[T](partialPivot: seq[int32], dim: int): seq[T] =
