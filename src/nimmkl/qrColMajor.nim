@@ -2,6 +2,8 @@ import ../nimmkl,common
 import std/complex
 
 
+# generic ?geqrf
+
 proc geqrf*[T: SomeElementType](matrixLayout: TLayout; m: int; n: int; a: seq[T];
             lda: int; tau: seq[T]): int =
 
@@ -14,6 +16,8 @@ proc geqrf*[T: SomeElementType](matrixLayout: TLayout; m: int; n: int; a: seq[T]
   when T is Complex32:
     result = cgeqrf(matrixLayout, m, n, a, lda, tau)
 
+
+# generic ?orgqr
 
 proc orgqr*[T: SomeElementType](matrixLayout: TLayout; m: int; n: int; k: int;
             a: seq[T]; lda: int; tau: seq[T]): int =
@@ -36,6 +40,8 @@ proc setUpperTrapezoidal[T: SomeElementType](rowsDest: int, colsDest: int,
         let idx = col * rowsDest + row
         dest[idx] = src[idx]
 
+
+# convenience QR decomposition
 
 proc qr*[T: SomeElementType](m: int; n: int; a: seq[T]) : (int, seq[T], seq[T]) =
   let k = min(m, n)
