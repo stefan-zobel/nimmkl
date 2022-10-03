@@ -41,6 +41,7 @@ proc qrsolve*[T: SomeElementType](m: int, n: int, rhsCount: int, a: seq[T],
     for i in 0..<n:
       x[j * n + i] = tmp[j * ldb + i]
 
+  tmp.setLen(0)
   (r, x)
 
 
