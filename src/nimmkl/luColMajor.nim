@@ -4,6 +4,8 @@
 import ../nimmkl,common
 import std/complex
 
+{.push styleChecks: off.}
+
 proc ONE[T](): T =
   when T is float64:
     result = 1.0'f64
@@ -143,4 +145,6 @@ proc lu*[T: SomeElementType](m: int; n: int; a: seq[T]): (int, seq[T], seq[T], s
     copyIntoU(U, rowsU, n, copy, m)
     P = genPermutationMatrix[T](pivot, m)
   (r, P, L, U, pivot)
+
+{.pop.}
 

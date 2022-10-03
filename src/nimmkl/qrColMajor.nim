@@ -4,6 +4,7 @@
 import ../nimmkl,common
 import std/complex
 
+{.push styleChecks: off.}
 
 # generic ?geqrf
 
@@ -60,4 +61,7 @@ proc qr*[T: SomeElementType](m: int; n: int; a: seq[T]) : (int, seq[T], seq[T]) 
     rc = orgqr[T](ColMajorOrder, m, n, k, Q, lda, tau)
 
   (rc, Q, R)
+
+
+{.pop.}
 
