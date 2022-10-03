@@ -1,5 +1,7 @@
 import mklTypes
 
+{.push styleChecks: off.}
+
 ##
 ##  ===========================================================================
 ##  Prototypes for level 1 BLAS functions (complex are recast as routines)
@@ -742,3 +744,4 @@ proc gemmS16s16s32Compute*(layout: Cblas_Layout; transA: Cblas_Transpose;
                           c: ptr Mkl_Int32; ldc: Mkl_Int; co: ptr Mkl_Int32) {.
     importc: "cblas_gemm_s16s16s32_compute", dynlib: libName.}
 
+{.pop.}
