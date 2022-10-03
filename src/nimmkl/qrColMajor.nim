@@ -51,7 +51,8 @@ proc qr*[T: SomeElementType](m: int; n: int; a: seq[T]) : (int, seq[T], seq[T]) 
   let lda = max(1, m)
   let tau = newSeq[T](k)
   var R = newSeq[T](n * n)
-  let Q = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var Q = a
   var rc = geqrf[T](ColMajorOrder, m, n, Q, lda, tau)
 
   if rc == 0:

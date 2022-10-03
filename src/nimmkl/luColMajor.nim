@@ -134,7 +134,8 @@ proc lu*[T: SomeElementType](m: int; n: int; a: seq[T]): (int, seq[T], seq[T], s
     U = newSeq[T](m * n)
     colsL = m
     rowsU = m
-  let copy = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var copy = a
 
   let r = getrf[T](ColMajorOrder, m, n, copy, lda, pivot)
   if r >= 0: # we also compute if U is exactly singular

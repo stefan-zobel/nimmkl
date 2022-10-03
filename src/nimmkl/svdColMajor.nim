@@ -50,21 +50,24 @@ proc gesdd*[T: SomeElementType, U: SomeFloat](matrixLayout: TLayout;
 
 proc svdAllAuto[T: SomeElementType](m: int; n: int; a: seq[T]): auto =
   let (u, s, vt) = newUSVt[T, ty(T)](m, n, TSvdJob.SvdJobAll)
-  let copy = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var copy = a
   let r = gesdd[T, ty(T)](TLayout.ColMajorOrder, TSvdJob.SvdJobAll, m, n, copy,
     max(1, m), s, u, max(1, m), vt, max(1, n))
   (r, u, s, vt)
 
 proc svdNoneAuto[T: SomeElementType](m: int; n: int; a: seq[T]): auto =
   let (u, s, vt) = newUSVt[T, ty(T)](m, n, TSvdJob.None)
-  let copy = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var copy = a
   let r = gesdd[T, ty(T)](TLayout.ColMajorOrder, TSvdJob.None, m, n, copy,
     max(1, m), s, u, 1, vt, 1)
   (r, u, s, vt)
 
 proc svdEconAuto[T: SomeElementType](m: int; n: int; a: seq[T]): auto =
   let (u, s, vt) = newUSVt[T, ty(T)](m, n, TSvdJob.Part)
-  let copy = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var copy = a
   let r = gesdd[T, ty(T)](TLayout.ColMajorOrder, TSvdJob.Part, m, n, copy,
     max(1, m), s, u, max(1, m), vt, max(1, min(m, n)))
   (r, u, s, vt)

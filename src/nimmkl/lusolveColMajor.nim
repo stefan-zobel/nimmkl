@@ -40,7 +40,8 @@ proc lusolve*[T: SomeElementType](n: int; rhsCount: int, a: seq[T], x: seq[T],
   let xSize = n * rhsCount * SIZE[T]()
   let ipiv: seq[int32] = newSeq[int32](n)
   moveMem(unsafeAddr(x[0]), unsafeAddr(b[0]), xSize)
-  let copy = deepCopy(a)
+  # use `var` instead of `let` to avoid `deepCopy(a)`
+  var copy = a
   let r = gesv[T](ColMajorOrder, n, rhsCount, copy, lda, ipiv, x, ldb)
   (r, x)
 
