@@ -43,14 +43,14 @@ proc newVlVrW[T](jobvr: TEigJob; n: int) : auto =
 
 proc evdFullAuto[T: SomeElementType](n: int; a: seq[T]): auto =
   var (ld, vl, vr, w) = newVlVrW[T](EigJobAll, n)
-  let copy = a
+  let copy = deepCopy(a)
   let r = geev[T, ty(T)](ColMajorOrder, ValuesOnly, EigJobAll, n, copy, ld, w, vl,
     ld, vr, ld)
   result = (r, vr, w)
 
 proc evdAuto[T: SomeElementType](n: int; a: seq[T]): auto =
   var (ld, vl, vr, w) = newVlVrW[T](ValuesOnly, n)
-  let copy = a
+  let copy = deepCopy(a)
   let r = geev[T, ty(T)](ColMajorOrder, ValuesOnly, ValuesOnly, n, copy, ld, w, vl,
     ld, vr, ld)
   result = (r, w)
