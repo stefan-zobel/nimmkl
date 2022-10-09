@@ -37,6 +37,6 @@ proc mul*[T: SomeElementType](m: int; n: int; k: int; a: seq[T]; b: seq[T]): seq
     let beta = alpha
 
   result = newseq[T](m * n)
-  gemm[T](CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, a, max(1, n),
+  gemm[T](CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, a, max(1, m),
     b, max(1, k), beta, result, max(1, m))
 
